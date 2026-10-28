@@ -2,7 +2,7 @@
 
 Code, input data and computational environment for the bioinformatic analyses of the study
 *"High recombination and intra-oocyst heterogeneity shape virulence in Cryptosporidium parvum, with
-CpDHR1 defined as a secondary virulence determinant"*.
+CpDHR1 defined as a novel virulence determinant"*.
 
 The virulent IIdA20G1-HLJ strain (tdTomato) and the avirulent IIdA19G1-GD strain (mNeonGreen) were
 crossed in IFN-γ knockout mice. Dual-fluorescent F1 progeny oocysts were sorted by flow cytometry and
