@@ -20,23 +20,6 @@ manuscript was produced:
 ```bash
 docker build -t cpar-revision .
 ```
-
-## Fallback when the Code Ocean registry is unreachable
-
-`Dockerfile.portable` builds the same R 4.5.1 environment from `rocker/r-ver:4.5.1` with the same
-package versions, and does not depend on the Code Ocean registry:
-
-```bash
-docker build -t cpar-revision -f Dockerfile.portable .
-```
-
-Beyond the capsule's package list it adds `jsonlite`, `data.table` and `RColorBrewer`, which the
-AlphaFold module (`code/11_AlphaFold`) needs; the capsule image already provided them as dependencies.
-
-Differences from the capsule image: the RStudio Server layer is absent (not needed to run the
-scripts), and the package installation is expressed as one `install_version()` call per package
-rather than being split between the Dockerfile and `postInstall`. The R version and every package
-version are identical. This file was added for the GitHub release and is not part of the original
 capsule export; validate it once with a full `code/run.sh` run before citing it.
 
 ## Command-line tools
