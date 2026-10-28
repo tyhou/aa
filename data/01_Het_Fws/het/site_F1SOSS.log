@@ -1,0 +1,27 @@
+PLINK v1.90b6.24 64-bit (6 Jun 2021)
+Options in effect:
+  --file F1SOSS_dip_Marker_1065
+  --hardy
+  --out het/site_F1SOSS
+
+Hostname: sonmi
+Working directory: /share/home/hty/work/IId-cross-Single-Oocyst-24-10-01/het_dip
+Start time: Thu Oct 10 19:39:53 2024
+
+Random number seed: 1728560393
+128043 MB RAM detected; reserving 64021 MB for main workspace.
+Scanning .ped file... done.
+Performing single-pass .bed write (1063 variants, 17 people).
+--file: het/site_F1SOSS-temporary.bed + het/site_F1SOSS-temporary.bim +
+het/site_F1SOSS-temporary.fam written.
+1063 variants loaded from .bim file.
+17 people (0 males, 0 females, 17 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to het/site_F1SOSS.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 17 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.966742.
+--hardy: Writing Hardy-Weinberg report (founders only) to het/site_F1SOSS.hwe
+... done.
+
+End time: Thu Oct 10 19:39:53 2024

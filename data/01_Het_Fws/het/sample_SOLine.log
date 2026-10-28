@@ -1,0 +1,25 @@
+PLINK v1.90b6.24 64-bit (6 Jun 2021)
+Options in effect:
+  --allow-extra-chr
+  --bfile SOLine_dip_Marker_1065
+  --het
+  --out het/sample_SOLine
+
+Hostname: sonmi
+Working directory: /share/home/hty/work/IId-cross-Single-Oocyst-24-10-01/het_dip
+Start time: Thu Oct 10 19:39:53 2024
+
+Random number seed: 1728560393
+128043 MB RAM detected; reserving 64021 MB for main workspace.
+1065 variants loaded from .bim file.
+49 people (0 males, 0 females, 49 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to het/sample_SOLine.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 49 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.999713.
+1065 variants and 49 people pass filters and QC.
+Note: No phenotypes present.
+--het: 1065 variants scanned, report written to het/sample_SOLine.het .
+
+End time: Thu Oct 10 19:39:53 2024
