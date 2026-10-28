@@ -1,0 +1,18 @@
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# pipeline output
+results/
+*.gds
+
+# logs
+*.out
+*.err
+slurm-*.out
+
+# OS
+.DS_Store
+Thumbs.db
