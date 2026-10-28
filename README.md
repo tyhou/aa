@@ -43,8 +43,6 @@ raw reads are re-processed from FASTQ.
 
 ## Quick start
 
-### Option A — container (recommended)
-
 ```bash
 docker build -t cpar-revision environment/
 mkdir -p results
@@ -58,43 +56,6 @@ docker run --rm \
 `run.sh` runs the 24 R scripts in dependency order and writes each module's output to
 `results/<module>/`.
 
-### Option B — local R session
 
-The scripts use the absolute paths `/data` and `/results` so that they run unchanged inside the
-container. To run them natively, rewrite those two prefixes once and then execute the master script:
-
-```bash
-grep -rl '"/data\|"/results' code --include='*.R' | \
-  xargs sed -i "s|\"/data|\"$PWD/data|g; s|\"/results|\"$PWD/results|g"
-mkdir -p results
-BASE_CODE="$PWD/code" RESULTS_BASE="$PWD/results" bash code/run.sh
-```
-
-All analyses are pure R and run on a laptop; only module `00` needs a cluster-scale machine.
-
----
-
-## Data
-
-**Included** (~33 MB): the 1,391-marker haploid and diploid VCFs, the SNP and InDel position lists,
-PLINK `.het`/`.eigenvec` outputs, windowed F<sub>ST</sub> and Pi tables, 48 phased per-chromosome
-VCFs, the IId 11730 GFF3 annotation, the LDhat `Rho.stat.final.txt`, the crossover tables, and the
-AlphaFold 3 prediction archive for CpDHR1-HLJ (full-data JSON and model CIF, 15 MB). These are
-sufficient to re-run modules `01`–`12` without re-processing any reads.
-
-**Not included**:
-
-* raw FASTQ and BAM files — deposited in NCBI (BioProject `TODO-BIOPROJECT-ACCESSION`);
-* the reference assembly (IIdA20G1-HLJ 11730, TGS assembly) — public accession
-  `TODO-REFERENCE-ACCESSION`;
-* the molecular-dynamics trajectories (756 MB of GROMACS output; not part of this repository).
-
-### The 1,391-marker variant set
-
-The marker set is the intersection of GATK4 HaplotypeCaller and BCFtools calls passing
-`QUAL ≥ 30`, `FORMAT/DP ≥ 10` and `INFO/MQ ≥ 40`, and comprises 1,138 SNPs and 253 InDels; 1,017 of
-the 1,065 SNPs from the earlier set are retained. The filtered VCFs and the two position lists used
-by module `03` are in `data/`. Upstream bcftools calls can be regenerated with
-`code/00_Trim_Mapping_SNP/bcftools-ploidy1.sh` (haploid) and `bcftools-ploidy2.sh` (diploid).
 
 
