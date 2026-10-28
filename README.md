@@ -53,9 +53,6 @@ docker run --rm \
   cpar-revision bash /code/run.sh
 ```
 
-`run.sh` runs the 24 R scripts in dependency order and writes each module's output to
-`results/<module>/`.
-
 
 
 
