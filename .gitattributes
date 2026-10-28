@@ -1,0 +1,6 @@
+# Analysis data are not source code: keep them out of the language statistics.
+data/** linguist-documentation=true
+*.fst linguist-detectable=false
+*.vcf linguist-detectable=false
+*.tsv linguist-detectable=false
+*.pi  linguist-detectable=false
