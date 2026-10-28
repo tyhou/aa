@@ -1,0 +1,85 @@
+# Fallback definition of the analysis environment.
+#
+# Builds the same R 4.5.1 environment as the Code Ocean capsule image, but from a public
+# base image so that it can be rebuilt when registry.codeocean.com is not reachable:
+#
+#   docker build -t cpar-revision -f environment/Dockerfile.portable environment/
+#
+# Package versions are identical to environment/Dockerfile. This file is not part of the
+# original capsule export; validate it once with a full code/run.sh run before citing it.
+
+FROM rocker/r-ver:4.5.1
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libuv1-dev \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev \
+        libpng-dev \
+        libgit2-dev \
+        zlib1g-dev \
+        libfontconfig1-dev \
+        libfreetype6-dev \
+        libharfbuzz-dev \
+        libfribidi-dev \
+        libtiff-dev \
+        libjpeg-dev \
+        libglpk-dev \
+        libgmp-dev \
+        libssh2-1-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# CRAN configuration used by every subsequent step
+RUN echo "options(repos = c(CRAN = 'https://cloud.r-project.org/'), \
+unzip = 'internal', \
+download.file.method = 'libcurl', \
+Ncpus = parallel::detectCores())" >> /etc/R/Rprofile.site
+
+RUN Rscript -e 'install.packages("remotes")'
+
+RUN Rscript -e 'remotes::install_version("viridis", "0.6.5")' \
+    && Rscript -e 'remotes::install_version("conflicted", "1.2.0")' \
+    && Rscript -e 'remotes::install_version("dbplyr", "2.6.0")' \
+    && Rscript -e 'remotes::install_version("dtplyr", "1.3.3")' \
+    && Rscript -e 'remotes::install_version("ids", "1.0.1")' \
+    && Rscript -e 'remotes::install_version("lubridate", "1.9.5")' \
+    && Rscript -e 'remotes::install_version("readxl", "1.6.0")' \
+    && Rscript -e 'remotes::install_version("rematch2", "2.1.2")' \
+    && Rscript -e 'remotes::install_version("rvest", "1.0.5")' \
+    && Rscript -e 'remotes::install_version("BiocManager", "1.30.27")' \
+    && Rscript -e 'remotes::install_version("UpSetR", "1.4.1")' \
+    && Rscript -e 'remotes::install_version("ggforce", "0.5.0")' \
+    && Rscript -e 'remotes::install_version("ggpubr", "1.0.0")' \
+    && Rscript -e 'remotes::install_version("openxlsx", "4.2.9")' \
+    && Rscript -e 'remotes::install_version("patchwork", "1.3.2")' \
+    && Rscript -e 'remotes::install_version("rehh", "3.2.3")' \
+    && Rscript -e 'remotes::install_version("tidyr", "1.3.2")' \
+    && Rscript -e 'remotes::install_version("tidyverse", "2.0.0")' \
+    && Rscript -e 'remotes::install_version("vcfR", "1.16.0")' \
+    && Rscript -e 'remotes::install_version("writexl", "2.0.1")' \
+    && Rscript -e 'remotes::install_version("scatterplot3d", "0.3-45")' \
+    && Rscript -e 'remotes::install_version("pheatmap", "1.0.13")' \
+    && Rscript -e 'remotes::install_version("R.utils", "2.13.0")'
+
+# Additional packages used by the AlphaFold and sensitivity modules (10-12).
+# Versions are not recorded in the capsule export; these are the releases the scripts were
+# written against.
+RUN Rscript -e 'remotes::install_version("jsonlite", "1.8.9")' \
+    && Rscript -e 'remotes::install_version("data.table", "1.16.2")' \
+    && Rscript -e 'remotes::install_version("RColorBrewer", "1.1-3")'
+
+# Bioconductor 3.22 (the release paired with R 4.5)
+RUN Rscript -e 'BiocManager::install(version = "3.22", ask = FALSE, update = FALSE)' \
+    && Rscript -e 'BiocManager::install(c("SeqArray", "SeqVarTools", "GenomicRanges", \
+        "IRanges", "S4Vectors", "BiocParallel", "BiocStyle"), ask = FALSE, update = FALSE)'
+
+# Fws estimation
+RUN Rscript -e 'install.packages("moimix", repos = c("https://plasmogenepi.r-universe.dev", \
+        "https://cloud.r-project.org"))'
+
+# plotting helper pinned to the commit used in the capsule
+RUN Rscript -e 'remotes::install_github("hrbrmstr/ggchicklet", \
+        ref = "64c468dd0900153be1690dbfc5cfb35710da8183")'

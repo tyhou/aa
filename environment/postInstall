@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -ex
+
+# 1.
+apt-get update && apt-get install -y libuv1-dev
+
+# 2.
+echo "options(repos = c(CRAN = 'https://cloud.r-project.org/'), \
+unzip = 'internal', \
+download.file.method = 'libcurl', \
+Ncpus = parallel::detectCores())" >> /etc/R/Rprofile.site
+
+# 3.
+Rscript -e "
+Sys.setenv(TAR = '/bin/tar');
+
+install.packages('BiocManager');
+
+
+BiocManager::install(
+  c('SeqVarTools', 'BiocParallel', 'BiocStyle', 'SeqArray', 'GenomicRanges', 'IRanges', 'S4Vectors'),
+  version = '3.22',
+  update = FALSE,
+  ask = FALSE
+);
+
+install.packages(
+  'moimix',
+  repos = c('https://plasmogenepi.r-universe.dev', 'https://cloud.r-project.org')
+);
+
+
+install.packages(c(
+  'R.utils', 'viridis', 'scatterplot3d', 'pheatmap', 
+  'conflicted', 'dbplyr', 'dtplyr', 'ids', 'lubridate', 
+  'readxl', 'rematch2', 'rvest', 'UpSetR', 'ggforce', 
+  'ggpubr', 'openxlsx', 'patchwork', 'rehh', 'tidyr', 
+  'tidyverse', 'vcfR', 'writexl'
+));
+"
