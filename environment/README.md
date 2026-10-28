@@ -14,16 +14,3 @@ manuscript was produced:
   `BiocParallel`, `BiocStyle`) installed by `postInstall`;
 * `moimix` (Fws) from `https://plasmogenepi.r-universe.dev`;
 * `ggchicklet` from a fixed GitHub commit.
-
-## Build
-
-```bash
-docker build -t cpar-revision .
-```
-capsule export; validate it once with a full `code/run.sh` run before citing it.
-
-## Command-line tools
-
-Modules `01`–`09` need R only. Module `00` additionally needs Trimmomatic 0.39, bwa-mem2, samtools,
-sambamba and bcftools, which are **not** installed by this image (the reads were processed on the
-institute cluster); install them separately if the FASTQ files are to be re-processed.
