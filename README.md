@@ -35,10 +35,6 @@ both are mounted into the container when the pipeline is run (see [Quick start](
 `pheatmap`, `scatterplot3d`, `openxlsx`, `writexl`, `viridis`, `R.utils` and their dependencies. The
 exact versions are fixed in the Dockerfile (`remotes::install_version()`) and in `postInstall`.
 
-**Command-line tools** (module `00`): Trimmomatic 0.39, bwa-mem2, samtools, sambamba, bcftools,
-PLINK 1.9 (`01`–`02`). The container installs the R side; the aligners are expected on `PATH` if the
-raw reads are re-processed from FASTQ.
-
 ---
 
 ## Quick start
