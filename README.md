@@ -137,35 +137,4 @@ the 1,065 SNPs from the earlier set are retained. The filtered VCFs and the two 
 by module `03` are in `data/`. Upstream bcftools calls can be regenerated with
 `code/00_Trim_Mapping_SNP/bcftools-ploidy1.sh` (haploid) and `bcftools-ploidy2.sh` (diploid).
 
----
 
-## Figure map
-
-| Manuscript panel | Module |
-|---|---|
-| Fig. 2a (coverage and heterogeneity) | `01_Het_Fws` |
-| Fig. 2b (PCA) | `02_PCA` |
-| Fig. 2c (read mapping) | IGV screenshot, not scripted |
-| Fig. 2d, Supplementary Figs. 3 and 4 (VAF, crossovers) | `04_Allele_Frequency` |
-| Fig. 3b (heterogeneity over time) | `01_Het_Fws/Het_dotplot.R` |
-| Fig. 3c, Supplementary Fig. 7 (PCA, scree, PC–covariate) | `02_PCA` |
-| Fig. 4c, 4d (allele-frequency contrast) | `07_Line3_8_11_24_Allele_Frequency` |
-| Fig. 4e (XP-EHH) | `08_XP-EHH` |
-| Fig. 4f (F<sub>ST</sub>/Pi) | `06_Fst_Pi` |
-| Fig. 4g (UpSet) | `09_Upset_Plot` |
-| Supplementary Fig. 2 (variant distribution) | `03_Variant_distribution` |
-| Supplementary Fig. 9 (genetic map, crossovers) | `05_Genetic_Map` |
-| Supplementary Fig. 12e–g (pLDDT, PAE) | `11_AlphaFold` |
-| Response Fig. 1 (cross-line direction concordance) | `10_Drift_Concordance` |
-
----
-
-## Licence
-
-* Code: MIT — see [LICENSE](LICENSE) (© 2026 Lihua Xiao).
-* Data tables in `data/`: CC0 1.0 — see [data/LICENSE](data/LICENSE).
-
-## Contact
-
-Tianyi Hou (South China Agricultural University). Please open an issue for questions about the code
-or to report a problem reproducing a result.
